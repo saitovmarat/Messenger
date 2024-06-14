@@ -1,3 +1,11 @@
+/home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/obj/Debug/net8.0/AvaloniaUI.csproj.AssemblyReference.cache
+/home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/obj/Debug/net8.0/Avalonia/Resources.Inputs.cache
+/home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/obj/Debug/net8.0/Avalonia/resources
+/home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/obj/Debug/net8.0/AvaloniaUI.GeneratedMSBuildEditorConfig.editorconfig
+/home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/obj/Debug/net8.0/AvaloniaUI.AssemblyInfoInputs.cache
+/home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/obj/Debug/net8.0/AvaloniaUI.AssemblyInfo.cs
+/home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/obj/Debug/net8.0/AvaloniaUI.csproj.CoreCompileInputs.cache
+/home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/obj/Debug/net8.0/AvaloniaUI.sourcelink.json
 /home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/bin/Debug/net8.0/AvaloniaUI
 /home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/bin/Debug/net8.0/AvaloniaUI.deps.json
 /home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/bin/Debug/net8.0/AvaloniaUI.runtimeconfig.json
@@ -107,13 +115,6 @@
 /home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/bin/Debug/net8.0/runtimes/win-arm64/native/libSkiaSharp.dll
 /home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/bin/Debug/net8.0/runtimes/win-x64/native/libSkiaSharp.dll
 /home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/bin/Debug/net8.0/runtimes/win-x86/native/libSkiaSharp.dll
-/home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/obj/Debug/net8.0/AvaloniaUI.csproj.AssemblyReference.cache
-/home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/obj/Debug/net8.0/Avalonia/Resources.Inputs.cache
-/home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/obj/Debug/net8.0/Avalonia/resources
-/home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/obj/Debug/net8.0/AvaloniaUI.GeneratedMSBuildEditorConfig.editorconfig
-/home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/obj/Debug/net8.0/AvaloniaUI.AssemblyInfoInputs.cache
-/home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/obj/Debug/net8.0/AvaloniaUI.AssemblyInfo.cs
-/home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/obj/Debug/net8.0/AvaloniaUI.csproj.CoreCompileInputs.cache
 /home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/obj/Debug/net8.0/Avalonia/references
 /home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/obj/Debug/net8.0/Avalonia/original.dll
 /home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/obj/Debug/net8.0/Avalonia/original.pdb
@@ -124,4 +125,3 @@
 /home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/obj/Debug/net8.0/AvaloniaUI.csproj.CopyComplete
 /home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/obj/Debug/net8.0/AvaloniaUI.genruntimeconfig.cache
 /home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/obj/Debug/net8.0/ref/AvaloniaUI.dll
-/home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/obj/Debug/net8.0/AvaloniaUI.sourcelink.json

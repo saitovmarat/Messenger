@@ -22,3 +22,6 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [/home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/Forms/EntryWindow/EntryWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[/home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/Forms/RegistrationWindow/RegistrationWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
