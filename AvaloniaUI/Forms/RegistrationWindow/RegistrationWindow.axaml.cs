@@ -1,10 +1,7 @@
-using System;
 using System.Text.RegularExpressions;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
-using MsBox.Avalonia;
-using MsBox.Avalonia.Enums;
 
 namespace AvaloniaUI;
 

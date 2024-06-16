@@ -10,8 +10,8 @@ class Email{
         
         string stmpServer = "smtp.gmail.com";
         int smtpPort = 587;
-        string smtpUserName = "maratsaitovv@gmail.com";
-        string smtpPassword = "nmal bfyl dpgj wiph";
+        string smtpUserName = "teletonna38@gmail.com";
+        string smtpPassword = "jajw mquk eiyo rjiz";
 
         using (SmtpClient smtpClient = new SmtpClient(stmpServer, smtpPort))
         {
