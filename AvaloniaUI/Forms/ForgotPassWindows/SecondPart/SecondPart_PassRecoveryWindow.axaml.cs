@@ -5,14 +5,21 @@ namespace AvaloniaUI;
 
 public partial class SecondPart_PassRecoveryWindow : Window
 {
-    public SecondPart_PassRecoveryWindow()
+    int code;
+    public SecondPart_PassRecoveryWindow(int code)
     {
+        this.code = code;
         InitializeComponent();
     }
 
     private void GoFurther_Click(object sender, RoutedEventArgs e)
     {
-        new ThirdPart_PassRecoveryWindow().Show();
-        Close();
+        bool isCodeNum = int.TryParse(EmailCode.Text, out int textBoxNum);
+        if (isCodeNum){
+            if (textBoxNum == code){
+                new ThirdPart_PassRecoveryWindow().Show();
+                Close();
+            }
+        }
     }
 }

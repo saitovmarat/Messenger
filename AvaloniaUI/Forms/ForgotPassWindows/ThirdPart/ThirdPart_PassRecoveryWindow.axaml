@@ -6,14 +6,36 @@
         x:Class="AvaloniaUI.ThirdPart_PassRecoveryWindow"
         Title="ThirdPart_PassRecoveryWindow"
         Background="Gray">
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-        <TextBox Width="200" HorizontalAlignment="Center" Margin="0,10"
-            Watermark="Новый пароль"/>
-        <TextBox Width="200" HorizontalAlignment="Center" Margin="0,10"
-            Watermark="Повторите пароль"/>
-        <Button Content="Изменить пароль" Width="200"
-            HorizontalContentAlignment="Center" 
-            HorizontalAlignment="Center" Margin="0,10" 
-            Click="ChangePass_Click"/>
-    </StackPanel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBox Width="170" HorizontalAlignment="Center" Margin="0,5" Watermark="Новый пароль" x:Name="NewPasswordTextBox" PasswordChar="*"/>
+                <Button Width="30" Background="DarkGray" HorizontalAlignment="Right"
+                    Margin="0,5" Click="ShowNewPasswordButton_Click">
+                    <Button.BorderBrush>
+                        <SolidColorBrush Color="White"/>
+                    </Button.BorderBrush>
+                    <Button.BorderThickness>
+                        <Thickness>0,1,1,1</Thickness>
+                    </Button.BorderThickness>
+                    <Image x:Name="NewPasswordEye" Source="/Assets/Images/ClosedEye.png" Width="20" Height="20"/>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBox Width="170" HorizontalAlignment="Center" Margin="0,5" Watermark="Повторите пароль" x:Name="RepeatPasswordTextBox" PasswordChar="*"/>
+                <Button Width="30" Background="DarkGray" HorizontalAlignment="Right"
+                    Margin="0,5" Click="ShowRepeatPasswordButton_Click">
+                    <Button.BorderBrush>
+                        <SolidColorBrush Color="White"/>
+                    </Button.BorderBrush>
+                    <Button.BorderThickness>
+                        <Thickness>0,1,1,1</Thickness>
+                    </Button.BorderThickness>
+                    <Image x:Name="RepeatPasswordEye" Source="/Assets/Images/ClosedEye.png" Width="20" Height="20"/>
+                </Button>
+            </StackPanel>
+            <Button Content="Изменить пароль" Width="200"
+                HorizontalContentAlignment="Center" 
+                HorizontalAlignment="Center" Margin="0,10" 
+                Click="ChangePass_Click"/>
+        </StackPanel>
 </Window>

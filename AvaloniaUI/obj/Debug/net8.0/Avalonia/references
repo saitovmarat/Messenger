@@ -21,7 +21,10 @@
 /home/ubuntu/.nuget/packages/avalonia.themes.simple/11.0.10/lib/net6.0/Avalonia.Themes.Simple.dll
 /home/ubuntu/.nuget/packages/avalonia.win32/11.0.10/lib/net6.0/Avalonia.Win32.dll
 /home/ubuntu/.nuget/packages/avalonia.x11/11.0.10/lib/net6.0/Avalonia.X11.dll
+/home/ubuntu/.nuget/packages/colortextblock.avalonia/11.0.2/lib/net6.0/ColorTextBlock.Avalonia.dll
+/home/ubuntu/.nuget/packages/dialoghost.avalonia/0.7.7/lib/netstandard2.0/DialogHost.Avalonia.dll
 /home/ubuntu/.nuget/packages/harfbuzzsharp/7.3.0/lib/net6.0/HarfBuzzSharp.dll
+/home/ubuntu/.nuget/packages/markdown.avalonia.tight/11.0.2/lib/net6.0/Markdown.Avalonia.dll
 /home/ubuntu/.nuget/packages/microcom.runtime/0.11.0/lib/net5.0/MicroCom.Runtime.dll
 /home/ubuntu/.nuget/packages/microsoft.codeanalysis.csharp/3.8.0/lib/netcoreapp3.1/Microsoft.CodeAnalysis.CSharp.dll
 /home/ubuntu/.nuget/packages/microsoft.codeanalysis.csharp.scripting/3.8.0/lib/netcoreapp3.1/Microsoft.CodeAnalysis.CSharp.Scripting.dll
@@ -32,6 +35,7 @@
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.5/ref/net8.0/Microsoft.VisualBasic.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.5/ref/net8.0/Microsoft.Win32.Primitives.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.5/ref/net8.0/Microsoft.Win32.Registry.dll
+/home/ubuntu/.nuget/packages/messagebox.avalonia/3.1.5.1/lib/netstandard2.0/MsBox.Avalonia.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.5/ref/net8.0/mscorlib.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.5/ref/net8.0/netstandard.dll
 /home/ubuntu/.nuget/packages/skiasharp/2.88.7/lib/net6.0/SkiaSharp.dll
@@ -116,6 +120,7 @@
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.5/ref/net8.0/System.Numerics.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.5/ref/net8.0/System.Numerics.Vectors.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.5/ref/net8.0/System.ObjectModel.dll
+/home/ubuntu/.nuget/packages/system.reactive/6.0.0/lib/net6.0/System.Reactive.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.5/ref/net8.0/System.Reflection.DispatchProxy.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.5/ref/net8.0/System.Reflection.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.5/ref/net8.0/System.Reflection.Emit.dll

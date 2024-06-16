@@ -32,5 +32,11 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [/home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/Forms/ForgotPassWindows/ThirdPart/ThirdPart_PassRecoveryWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[/home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/Forms/MainWindow/MainWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[/home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/Forms/RegistrationWindow/EmailCodeCheckWindow/EmailCodeCheckWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [/home/ubuntu/Projects/BarsGroup/Messenger/AvaloniaUI/Forms/RegistrationWindow/RegistrationWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

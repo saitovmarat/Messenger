@@ -10,9 +10,12 @@ public partial class FirstPart_PassRecoveryWindow : Window
         InitializeComponent();
     }
 
-    private void GetCode_Click(object sender, RoutedEventArgs e)
+    private void GetCodeButton_Click(object sender, RoutedEventArgs e)
     {
-        new SecondPart_PassRecoveryWindow().Show();
-        Close();
+        int emailCode = 0;
+        if(Email.SendEmailCode(EmailTextBox.Text, ref emailCode)){
+            new SecondPart_PassRecoveryWindow(emailCode).Show();
+            Close();
+        }
     }
 }
