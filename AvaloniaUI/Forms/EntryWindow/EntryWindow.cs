@@ -1,6 +1,10 @@
+using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
+using AvaloniaUI.Database;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
 
 namespace AvaloniaUI;
 public partial class EntryWindow : Window
@@ -23,13 +27,23 @@ public partial class EntryWindow : Window
 
     private void EntryButton_Click(object sender, RoutedEventArgs e)
     {
-        new MainWindow().Show();
-        Close();
+        using(var db = new UsersDbContext()){
+            var user = db.Users
+                .Where(b => (b.Name == NameTextBox.Text || b.Mail == NameTextBox.Text) && b.Password == PasswordTextBox.Text)
+                .ToList();
+            if(user.Count != 0){
+                new MainWindow().Show();
+                Close();
+            }
+            else{
+                MessageBoxManager.GetMessageBoxStandard("Ошибка", "Такого пользователя не существует", ButtonEnum.Ok).ShowWindowAsync();
+            }
+        }
     }
 
     private void RegistrationButton_Click(object sender, RoutedEventArgs e)
     {
-        new RegistrationWindow().Show();
+        new MailWindow().Show();
         Close();
     }
     private void ForgotPassword_Click(object sender, RoutedEventArgs e)

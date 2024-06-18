@@ -31,6 +31,18 @@
 /home/ubuntu/.nuget/packages/microsoft.codeanalysis.common/3.8.0/lib/netcoreapp3.1/Microsoft.CodeAnalysis.dll
 /home/ubuntu/.nuget/packages/microsoft.codeanalysis.scripting.common/3.8.0/lib/netcoreapp3.1/Microsoft.CodeAnalysis.Scripting.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.5/ref/net8.0/Microsoft.CSharp.dll
+/home/ubuntu/.nuget/packages/microsoft.entityframeworkcore.abstractions/8.0.2/lib/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+/home/ubuntu/.nuget/packages/microsoft.entityframeworkcore/8.0.2/lib/net8.0/Microsoft.EntityFrameworkCore.dll
+/home/ubuntu/.nuget/packages/microsoft.entityframeworkcore.relational/8.0.2/lib/net8.0/Microsoft.EntityFrameworkCore.Relational.dll
+/home/ubuntu/.nuget/packages/microsoft.extensions.caching.abstractions/8.0.0/lib/net8.0/Microsoft.Extensions.Caching.Abstractions.dll
+/home/ubuntu/.nuget/packages/microsoft.extensions.caching.memory/8.0.0/lib/net8.0/Microsoft.Extensions.Caching.Memory.dll
+/home/ubuntu/.nuget/packages/microsoft.extensions.configuration.abstractions/8.0.0/lib/net8.0/Microsoft.Extensions.Configuration.Abstractions.dll
+/home/ubuntu/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/home/ubuntu/.nuget/packages/microsoft.extensions.dependencyinjection/8.0.0/lib/net8.0/Microsoft.Extensions.DependencyInjection.dll
+/home/ubuntu/.nuget/packages/microsoft.extensions.logging.abstractions/8.0.0/lib/net8.0/Microsoft.Extensions.Logging.Abstractions.dll
+/home/ubuntu/.nuget/packages/microsoft.extensions.logging/8.0.0/lib/net8.0/Microsoft.Extensions.Logging.dll
+/home/ubuntu/.nuget/packages/microsoft.extensions.options/8.0.0/lib/net8.0/Microsoft.Extensions.Options.dll
+/home/ubuntu/.nuget/packages/microsoft.extensions.primitives/8.0.0/lib/net8.0/Microsoft.Extensions.Primitives.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.5/ref/net8.0/Microsoft.VisualBasic.Core.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.5/ref/net8.0/Microsoft.VisualBasic.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.5/ref/net8.0/Microsoft.Win32.Primitives.dll
@@ -38,6 +50,8 @@
 /home/ubuntu/.nuget/packages/messagebox.avalonia/3.1.5.1/lib/netstandard2.0/MsBox.Avalonia.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.5/ref/net8.0/mscorlib.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.5/ref/net8.0/netstandard.dll
+/home/ubuntu/.nuget/packages/npgsql/8.0.2/lib/net8.0/Npgsql.dll
+/home/ubuntu/.nuget/packages/npgsql.entityframeworkcore.postgresql/8.0.2/lib/net8.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
 /home/ubuntu/.nuget/packages/skiasharp/2.88.7/lib/net6.0/SkiaSharp.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.5/ref/net8.0/System.AppContext.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.5/ref/net8.0/System.Buffers.dll

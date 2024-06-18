@@ -21,7 +21,7 @@
                 </Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBox Width="170" HorizontalAlignment="Center" Margin="0,5" Watermark="Повторите пароль" x:Name="RepeatPasswordTextBox" PasswordChar="*"/>
+                <TextBox Width="170" HorizontalAlignment="Center" Margin="0,5" Watermark="Повторите пароль" x:Name="RepeatNewPasswordTextBox" PasswordChar="*"/>
                 <Button Width="30" Background="DarkGray" HorizontalAlignment="Right"
                     Margin="0,5" Click="ShowRepeatPasswordButton_Click">
                     <Button.BorderBrush>

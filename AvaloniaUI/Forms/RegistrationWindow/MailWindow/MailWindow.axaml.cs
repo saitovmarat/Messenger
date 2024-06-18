@@ -4,34 +4,33 @@ using Avalonia.Interactivity;
 using AvaloniaUI.Database;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
-#pragma warning disable CS8604
+#pragma warning disable CS8604 
 
 namespace AvaloniaUI;
 
-public partial class FirstPart_PassRecoveryWindow : Window
+public partial class MailWindow : Window
 {
-    public FirstPart_PassRecoveryWindow()
+    public MailWindow()
     {
         InitializeComponent();
     }
 
-    private void GetCodeButton_Click(object sender, RoutedEventArgs e)
+    private void GetCode_Click(object sender, RoutedEventArgs e)
     {
         using(var db = new UsersDbContext()){
             var user = db.Users
                 .Where(b => b.Mail == MailTextBox.Text)
                 .ToList();
             if(user.Count == 0){
-                MessageBoxManager.GetMessageBoxStandard("Ошибка", "Пользователя с такой почтой не существует", ButtonEnum.Ok).ShowWindowAsync();
-            }
-            else{
                 int emailCode = 0;
                 if (Email.SendEmailCode(MailTextBox.Text, ref emailCode)){
-                    new SecondPart_PassRecoveryWindow(MailTextBox.Text, emailCode).Show();
+                    new RegistrationWindow(MailTextBox.Text,emailCode).Show();
                     Close();
                 }
             }
+            else{
+                MessageBoxManager.GetMessageBoxStandard("Ошибка", "Пользователь с такой почтой уже зарегистрирован", ButtonEnum.Ok).ShowWindowAsync();
+            }
         }
-        
     }
 }
