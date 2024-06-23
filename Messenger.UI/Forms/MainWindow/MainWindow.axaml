@@ -1,0 +1,81 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Messenger.UI.MainWindow"
+        Title="Основное меню"
+        Background="Gray">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Row="0" Grid.Column="0" Margin="0">
+            <StackPanel>
+                <TextBlock Text="" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </StackPanel>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Row="0" Grid.Column="1" Margin="0">
+            <StackPanel>
+                <TextBlock Text="" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+            </StackPanel>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Row="1" Grid.Column="0" Margin="0">
+            <ScrollViewer>
+                <StackPanel x:Name="ChatStackPanel">
+                    <Grid Background="LightBlue" PointerPressed="Panel_Click">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="/Assets/Images/OpenEye.png" Width="100" Height="100"/>
+                        <TextBlock Grid.Column="1" FontSize="26" Height="100" VerticalAlignment="Center" HorizontalAlignment="Center">Jordan Kilganon</TextBlock>
+                    </Grid>
+                    <Grid PointerPressed="Panel_Click">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="/Assets/Images/OpenEye.png" Width="100" Height="100"/>
+                        <TextBlock Grid.Column="1" FontSize="26" Height="100" VerticalAlignment="Center" HorizontalAlignment="Center">Michael Jordan</TextBlock>
+                    </Grid>
+                    <Grid Background="LightBlue" PointerPressed="Panel_Click">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="/Assets/Images/OpenEye.png" Width="100" Height="100"/>
+                        <TextBlock Grid.Column="1" FontSize="26" Height="100" VerticalAlignment="Center" HorizontalAlignment="Center">Marat Saitov</TextBlock>
+                    </Grid>
+                    <Grid PointerPressed="Panel_Click">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="/Assets/Images/OpenEye.png" Width="100" Height="100"/>
+                        <TextBlock Grid.Column="1" FontSize="26" Height="100" VerticalAlignment="Center" HorizontalAlignment="Center">Andrew Tate</TextBlock>
+                    </Grid>
+                    <Grid Background="LightBlue" PointerPressed="Panel_Click">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="/Assets/Images/OpenEye.png" Width="100" Height="100"/>
+                        <TextBlock Grid.Column="1" FontSize="26" Height="100" VerticalAlignment="Center" HorizontalAlignment="Center">Jonh Whick</TextBlock>
+                    </Grid>
+                    <TextBlock FontSize="22" Height="100">Jordan Peterson</TextBlock>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Row="1" Grid.Column="1" Margin="0">
+            <TextBox FontSize="24" VerticalAlignment="Bottom" 
+                KeyDown="TextBox_KeyDown"/>
+        </Border>
+    </Grid>
+</Window>
