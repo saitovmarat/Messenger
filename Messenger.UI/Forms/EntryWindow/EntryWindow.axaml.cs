@@ -1,9 +1,12 @@
-using System.Linq;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
+using Newtonsoft.Json;
 
 namespace Messenger.UI;
 
@@ -25,20 +28,30 @@ public partial class EntryWindow : Window
         }
     }
 
-    private void EntryButton_Click(object sender, RoutedEventArgs e)
+    private async void EntryButton_Click(object sender, RoutedEventArgs e)
     {
-        // using(var db = new UsersDbContext()){
-        //     var user = db.Users
-        //         .Where(b => (b.Name == NameTextBox.Text || b.Mail == NameTextBox.Text) && b.Password == PasswordTextBox.Text)
-        //         .ToList();
-        //     if(user.Count != 0){
+        using (HttpClient client = new HttpClient())
+        {
+            var data = new Dictionary<string, string?>
+            {
+                { "userName", UserNameTextBox.Text },
+                { "password", PasswordTextBox.Text }
+            };
+
+            var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PostAsync("http://localhost:5243/api/Login", content);
+
+            if (response.IsSuccessStatusCode)
+            {
                 new MainWindow().Show();
                 Close();
-        //     }
-        //     else{
-        //         MessageBoxManager.GetMessageBoxStandard("Ошибка", "Такого пользователя не существует", ButtonEnum.Ok).ShowWindowAsync();
-        //     }
-        // }
+            }
+            else
+            {
+                await MessageBoxManager.GetMessageBoxStandard("Error", $"Ошибка отправки запроса: {response.StatusCode}", ButtonEnum.Ok).ShowWindowAsync();
+            }
+        }
     }
 
     private void ForgotPassword_Click(object sender, RoutedEventArgs e)

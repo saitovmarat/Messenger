@@ -7,7 +7,6 @@ using System.Net.Http;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Text;
-#pragma warning disable CS8604
 
 namespace Messenger.UI;
 
@@ -42,7 +41,7 @@ public partial class RegistrationWindow : Window
     {
         using (HttpClient client = new HttpClient())
         {
-            var data = new Dictionary<string, string>
+            var data = new Dictionary<string, string?>
             {
                 { "userName", UserNameTextBox.Text },
                 { "email", EmailTextBox.Text },
