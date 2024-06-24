@@ -4,6 +4,7 @@ using System.Text;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
+using Messenger.UI.Services;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
 using Newtonsoft.Json;
@@ -32,13 +33,8 @@ public partial class EntryWindow : Window
     {
         using (HttpClient client = new HttpClient())
         {
-            var data = new Dictionary<string, string?>
-            {
-                { "userName", UserNameTextBox.Text },
-                { "password", PasswordTextBox.Text }
-            };
-
-            var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+            var content = JsonContentService.GetLoginContent(
+                UserNameTextBox.Text, PasswordTextBox.Text);
 
             HttpResponseMessage response = await client.PostAsync("http://localhost:5243/api/Login", content);
 

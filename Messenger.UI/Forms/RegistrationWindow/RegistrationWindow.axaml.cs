@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Text;
+using Messenger.UI.Services;
 
 namespace Messenger.UI;
 
@@ -41,25 +42,16 @@ public partial class RegistrationWindow : Window
     {
         using (HttpClient client = new HttpClient())
         {
-            var data = new Dictionary<string, string?>
-            {
-                { "userName", UserNameTextBox.Text },
-                { "email", EmailTextBox.Text },
-                { "password", PasswordTextBox.Text },
-                { "repeatPassword", RepeatPasswordTextBox.Text }
-            };
-
-            var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+            var content = JsonContentService.GetRegistrationContent(
+                UserNameTextBox.Text, EmailTextBox.Text, PasswordTextBox.Text, RepeatPasswordTextBox.Text);
 
             HttpResponseMessage response = await client.PostAsync("http://localhost:5243/api/Register", content);
 
-            if (response.IsSuccessStatusCode)
-            {
+            if (response.IsSuccessStatusCode){
                 new EntryWindow().Show();
                 Close();
             }
-            else
-            {
+            else{
                 await MessageBoxManager.GetMessageBoxStandard("Error", $"Ошибка отправки запроса: {response.StatusCode}", ButtonEnum.Ok).ShowWindowAsync();
             }
         }
