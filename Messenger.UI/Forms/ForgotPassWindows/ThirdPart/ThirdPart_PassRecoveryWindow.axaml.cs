@@ -1,21 +1,20 @@
 using System.Linq;
+using System.Net.Http;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
+using Messenger.UI.Services;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
 
 namespace Messenger.UI;
 
 public partial class ThirdPart_PassRecoveryWindow : Window
 {
-    private string Mail { get; set; }
-    public ThirdPart_PassRecoveryWindow(string mail)
+    private string Email { get; set; }
+    public ThirdPart_PassRecoveryWindow(string email)
     {
-        Mail = mail;
-        InitializeComponent();
-    }
-    public ThirdPart_PassRecoveryWindow()
-    {
-        Mail = "";
+        Email = email;
         InitializeComponent();
     }
 
@@ -40,22 +39,25 @@ public partial class ThirdPart_PassRecoveryWindow : Window
             RepeatPasswordEye.Source = new Bitmap("Assets/Images/ClosedEye.png");
         }
     }
-    private void ChangePass_Click(object sender, RoutedEventArgs e)
+    private async void ChangePass_Click(object sender, RoutedEventArgs e)
     {
-        // if(NewPasswordTextBox.Text == RepeatNewPasswordTextBox.Text 
-        // && !string.IsNullOrEmpty(NewPasswordTextBox.Text))
-        // {
-        //     using(var db = new UsersDbContext()){
-        //         var user = db.Users
-        //             .Where(b => b.Mail == Mail)
-        //             .ToList();
-        //         if(user.Count != 0){
-        //             user[0].Password = NewPasswordTextBox.Text;
-        //             db.SaveChanges();
-        //         }
-        //     }
-            new EntryWindow().Show();
-            Close();
-        // }
+        if(NewPasswordTextBox.Text != RepeatNewPasswordTextBox.Text){
+            await MessageBoxManager.GetMessageBoxStandard("Error", "Пароли не совпадают", ButtonEnum.Ok).ShowWindowAsync();
+            return;
+        }
+        using (HttpClient client = new HttpClient())
+        {
+            var content = JsonContentService.GetChangePasswordContent(Email, NewPasswordTextBox.Text);
+
+            HttpResponseMessage response = await client.PostAsync("http://localhost:5243/api/ChangePassword", content);
+
+            if (response.IsSuccessStatusCode){
+                new EntryWindow().Show();
+                Close();
+            }
+            else{
+                await MessageBoxManager.GetMessageBoxStandard("Error", $"Ошибка отправки запроса: {response.StatusCode}", ButtonEnum.Ok).ShowWindowAsync();
+            }
+        }
     }
 }

@@ -1,6 +1,9 @@
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Messenger.UI.Services;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
 #pragma warning disable CS8604
@@ -14,23 +17,22 @@ public partial class FirstPart_PassRecoveryWindow : Window
         InitializeComponent();
     }
 
-    private void GetCodeButton_Click(object sender, RoutedEventArgs e)
+    private async void GetCodeButton_Click(object sender, RoutedEventArgs e)
     {
-        // using(var db = new UsersDbContext()){
-        //     var user = db.Users
-        //         .Where(b => b.Mail == MailTextBox.Text)
-        //         .ToList();
-        //     if(user.Count == 0){
-        //         MessageBoxManager.GetMessageBoxStandard("Ошибка", "Пользователя с такой почтой не существует", ButtonEnum.Ok).ShowWindowAsync();
-        //     }
-        //     else{
-        //         int emailCode = 0;
-        //         if (Email.SendEmailCode(MailTextBox.Text, ref emailCode)){
-                    new SecondPart_PassRecoveryWindow().Show();
-                    Close();
-        //         }
-        //     }
-        // }
+        using (HttpClient client = new HttpClient())
+        {
+            var content = JsonContentService.GetSendEmailCodeContent(EmailTextBox.Text);
+
+            HttpResponseMessage response = await client.PostAsync("http://localhost:5243/api/SendEmailCode", content);
+
+            if (response.IsSuccessStatusCode){
+                new SecondPart_PassRecoveryWindow(EmailTextBox.Text).Show();
+                Close();
+            }
+            else{
+                await MessageBoxManager.GetMessageBoxStandard("Error", $"Ошибка отправки запроса: {response.StatusCode}", ButtonEnum.Ok).ShowWindowAsync();
+            }
+        }
         
     }
 }

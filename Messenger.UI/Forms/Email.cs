@@ -7,7 +7,6 @@ using MsBox.Avalonia.Enums;
 class Email{
     public static bool SendEmailCode(string email, ref int emailCode)
     {
-        
         string stmpServer = "smtp.gmail.com";
         int smtpPort = 587;
         string smtpUserName = "teletonna38@gmail.com";

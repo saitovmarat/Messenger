@@ -36,4 +36,29 @@ public static class JsonContentService
 
         return content;
     }
+
+    public static StringContent GetSendEmailCodeContent(string? email)
+    {
+        var data = new Dictionary<string, string?>
+        {
+            { "email", email }
+        };
+
+        var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+
+        return content;
+    }
+
+    public static StringContent GetChangePasswordContent(string? email, string? newPassword)
+    {
+        var data = new Dictionary<string, string?>
+        {
+            { "email", email },
+            { "newPassword", newPassword }
+        };
+
+        var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+
+        return content;
+    }
 }

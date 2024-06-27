@@ -6,31 +6,17 @@ namespace Messenger.UI;
 
 public partial class SecondPart_PassRecoveryWindow : Window
 {
-    private int MailCode { get; set; }
-    private string Mail { get; set; }
+    private string Email { get; set; }
     
-    public SecondPart_PassRecoveryWindow(string mail, int code)
+    public SecondPart_PassRecoveryWindow(string email)
     {
-        Mail = mail;
-        MailCode = code;
-        InitializeComponent();
-    }
-
-    public SecondPart_PassRecoveryWindow()
-    {
-        Mail = "";
-        MailCode = 0;
+        Email = email;
         InitializeComponent();
     }
 
     private void GoFurther_Click(object sender, RoutedEventArgs e)
     {
-        // bool isCodeNum = int.TryParse(MailCodeTextBox.Text, out int textBoxNum);
-        // if (isCodeNum){
-        //     if (textBoxNum == MailCode){
-                new ThirdPart_PassRecoveryWindow().Show();
-                Close();
-        //     }
-        // }
+        new ThirdPart_PassRecoveryWindow(Email).Show();
+        Close();
     }
 }
