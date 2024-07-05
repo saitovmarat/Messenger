@@ -1,0 +1,16 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Messenger.UI.App"
+             xmlns:local="clr-namespace:Messenger.UI"
+             RequestedThemeVariant="Dark">
+
+    <Application.DataTemplates>
+        <local:ViewLocator />
+    </Application.DataTemplates>    
+
+    
+    <Application.Styles>
+        <FluentTheme />
+        <StyleInclude Source="avares://Messenger.UI/Assets/Icons.axaml"/>
+    </Application.Styles>
+</Application>

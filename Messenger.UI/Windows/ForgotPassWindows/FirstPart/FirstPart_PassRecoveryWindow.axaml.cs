@@ -33,6 +33,5 @@ public partial class FirstPart_PassRecoveryWindow : Window
                 await MessageBoxManager.GetMessageBoxStandard("Error", $"Ошибка отправки запроса: {response.StatusCode}", ButtonEnum.Ok).ShowWindowAsync();
             }
         }
-        
     }
 }

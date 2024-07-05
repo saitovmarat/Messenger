@@ -1,13 +1,10 @@
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
 using Messenger.UI.Services;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
-using Newtonsoft.Json;
 
 namespace Messenger.UI;
 

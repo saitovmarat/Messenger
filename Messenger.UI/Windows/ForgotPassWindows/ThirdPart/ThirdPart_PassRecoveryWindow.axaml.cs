@@ -11,13 +11,15 @@ namespace Messenger.UI;
 
 public partial class ThirdPart_PassRecoveryWindow : Window
 {
-    private string Email { get; set; }
+    private string? Email { get; set; }
     public ThirdPart_PassRecoveryWindow(string email)
     {
         Email = email;
         InitializeComponent();
     }
-
+    public ThirdPart_PassRecoveryWindow() =>
+        InitializeComponent();
+        
     private void ShowNewPasswordButton_Click(object sender, RoutedEventArgs e){
         if (NewPasswordTextBox.PasswordChar == '*'){
             NewPasswordTextBox.PasswordChar = '\0';

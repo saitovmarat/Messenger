@@ -1,7 +1,8 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-
+using Messenger.UI.ViewModels;
+using Messenger.UI.Views;
 
 namespace Messenger.UI;
 
@@ -16,7 +17,10 @@ public partial class App : Application
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = new EntryWindow();
+            desktop.MainWindow = new MainWindow()
+            {
+                DataContext = new MainWindowViewModel()
+            };
         }
 
         base.OnFrameworkInitializationCompleted();

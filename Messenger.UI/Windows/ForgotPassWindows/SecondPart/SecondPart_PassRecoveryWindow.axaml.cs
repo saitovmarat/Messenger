@@ -6,13 +6,15 @@ namespace Messenger.UI;
 
 public partial class SecondPart_PassRecoveryWindow : Window
 {
-    private string Email { get; set; }
+    private string? Email { get; set; }
     
     public SecondPart_PassRecoveryWindow(string email)
     {
         Email = email;
         InitializeComponent();
     }
+    public SecondPart_PassRecoveryWindow() =>
+        InitializeComponent();
 
     private void GoFurther_Click(object sender, RoutedEventArgs e)
     {

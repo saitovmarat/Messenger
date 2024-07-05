@@ -1,9 +1,10 @@
 ﻿using Avalonia;
+using Avalonia.ReactiveUI;
 using System;
 
 namespace Messenger.UI;
 
-class Program
+sealed class Program
 {
     [STAThread]
     public static void Main(string[] args) => BuildAvaloniaApp()
@@ -13,5 +14,6 @@ class Program
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
             .WithInterFont()
-            .LogToTrace();
+            .LogToTrace()
+            .UseReactiveUI();
 }
