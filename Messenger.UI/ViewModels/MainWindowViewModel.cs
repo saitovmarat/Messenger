@@ -1,21 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Messenger.UI.Schemas;
+using Messenger.UI.ViewModels.SplitViewPane;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
+using Newtonsoft.Json;
+
+#pragma warning disable CS8604 // Possible null reference argument.
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
 
 namespace Messenger.UI.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    [ObservableProperty]
-    private bool _isPaneOpen = false;
+    public MainWindowViewModel()
+    {
+        InitializeAsync();
+    }
+
+    #region LoadingAllChats
+    private async void InitializeAsync()
+    {
+        await LoadChatsAsync();
+    }
+
+    private async Task LoadChatsAsync()
+    {
+        List<ChatInfoSchema> chats = await GetChats();
+        foreach (var chat in chats)
+        {
+            Items.Add(new ListItemTemplate(new ChatPageViewModel(chat.Id), chat.ChatName, "PeopleRegular"));
+        }
+    }
+    private async Task<List<ChatInfoSchema>?> GetChats()
+    {
+        HttpClient client = new();
+        client.DefaultRequestHeaders.Authorization =
+            new AuthenticationHeaderValue("Bearer", Program.accessToken);
+
+        var response = await client.GetAsync("http://localhost:5243/api/Chats");
+        if(response.IsSuccessStatusCode){
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var chatList = JsonConvert.DeserializeObject<List<ChatInfoSchema>>(responseContent);
+            return chatList;
+        }
+        else{
+            await MessageBoxManager.GetMessageBoxStandard("Error", $"Ошибка получения чатов: {response.StatusCode}", ButtonEnum.Ok).ShowWindowAsync();
+            return new List<ChatInfoSchema>();
+        }
+        
+    } 
+    #endregion
+
 
     [ObservableProperty]
-    private ViewModelBase _currentPage = new HomePageViewModel();
+    private ViewModelBase? _currentPage = null;
 
     [ObservableProperty]
     private ListItemTemplate? _selectedListItem;
@@ -23,35 +72,51 @@ public partial class MainWindowViewModel : ViewModelBase
     partial void OnSelectedListItemChanged(ListItemTemplate? value)
     {
         if(value is null) return;
-        var instance = Activator.CreateInstance(value.ModelType);
+        var instance = Activator.CreateInstance(value.ViewModel.GetType());
         if(instance is null) return;
         CurrentPage = (ViewModelBase)instance;
     }
 
-    public ObservableCollection<ListItemTemplate> Items { get; } = new()
+    public static ObservableCollection<ListItemTemplate> Items { get; } = new();
+
+    #region OnViewsClick
+    [RelayCommand]
+    private void SearchChat()
     {
-        new ListItemTemplate(typeof(HomePageViewModel), "HomeRegular"),
-        new ListItemTemplate(typeof(ButtonPageViewModel), "CursorHoverRegular")
-    };
+        var instance = Activator.CreateInstance(typeof(SearchChatsPageViewModel)); 
+        if(instance is null) return;
+        CurrentPage = (ViewModelBase)instance;
+    }
 
     [RelayCommand]
-    private void TriggerPane()
+    private void Settings()
     {
-        IsPaneOpen = !IsPaneOpen;
+        var instance = Activator.CreateInstance(typeof(SettingsPageViewModel)); 
+        if(instance is null) return;
+        CurrentPage = (ViewModelBase)instance;
     }
+
+    [RelayCommand]
+    private void AddChat()
+    {
+        var instance = Activator.CreateInstance(typeof(AddChatPageViewModel)); 
+        if(instance is null) return;
+        CurrentPage = (ViewModelBase)instance;
+    }
+    #endregion
 }
 
 public class ListItemTemplate
 {
-    public ListItemTemplate(Type type, string iconKey)
+    public ListItemTemplate(ViewModelBase viewModel, string chatName, string iconKey)
     {
-        ModelType = type;
-        Label = type.Name.Replace("PageViewModel", "");
+        ViewModel = viewModel;
+        Label = chatName;
         
         Application.Current!.TryFindResource(iconKey, out var res);
         ListItemIcon = (StreamGeometry)res!;
     }
+    public ViewModelBase ViewModel { get; }
     public string Label { get; }
-    public Type ModelType { get; }
     public StreamGeometry ListItemIcon { get; }
 }

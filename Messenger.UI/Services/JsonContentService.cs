@@ -49,10 +49,11 @@ public static class JsonContentService
         return content;
     }
 
-    public static StringContent GetChangePasswordContent(string? email, string? newPassword)
+    public static StringContent GetChangePasswordContent(string? resetCode, string? email, string? newPassword)
     {
         var data = new Dictionary<string, string?>
         {
+            {"resetCode", resetCode },
             { "email", email },
             { "newPassword", newPassword }
         };
@@ -61,4 +62,29 @@ public static class JsonContentService
 
         return content;
     }
+
+    public static StringContent GetAddChatContent(string? chatName)
+    {
+        var data = new Dictionary<string, string?>
+        {
+            { "chatName", chatName }
+        };
+
+        var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+
+        return content;
+    }
+
+    public static StringContent GetChatIdContent(string? Id)
+    {
+        var data = new Dictionary<string, string?>
+        {
+            { "chatId", Id }
+        };
+
+        var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+
+        return content;
+    }
+
 }

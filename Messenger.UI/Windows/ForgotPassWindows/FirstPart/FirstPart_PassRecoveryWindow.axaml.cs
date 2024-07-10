@@ -17,6 +17,12 @@ public partial class FirstPart_PassRecoveryWindow : Window
         InitializeComponent();
     }
 
+    private void GoBack_Click(object sender, RoutedEventArgs e)
+    {
+        new EntryWindow().Show();
+        Close();
+    }
+
     private async void GetCodeButton_Click(object sender, RoutedEventArgs e)
     {
         using (HttpClient client = new HttpClient())

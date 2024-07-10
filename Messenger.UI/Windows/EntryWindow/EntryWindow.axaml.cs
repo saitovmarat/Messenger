@@ -3,13 +3,19 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
 using Messenger.UI.Services;
+using Messenger.UI.ViewModels;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
 
 namespace Messenger.UI;
 
 public partial class EntryWindow : Window
 {
+
     public EntryWindow()
     {
         InitializeComponent();
@@ -18,11 +24,11 @@ public partial class EntryWindow : Window
     {
         if (PasswordTextBox.PasswordChar == '*'){
             PasswordTextBox.PasswordChar = '\0';
-            PasswordEye.Source = new Bitmap("Assets/Images/OpenEye.png");
+            PasswordEye.Source = new Bitmap("Assets/OpenEye.png");
         }
         else{
             PasswordTextBox.PasswordChar = '*';
-            PasswordEye.Source = new Bitmap("Assets/Images/ClosedEye.png");
+            PasswordEye.Source = new Bitmap("Assets/ClosedEye.png");
         }
     }
 
@@ -30,19 +36,26 @@ public partial class EntryWindow : Window
     {
         using (HttpClient client = new HttpClient())
         {
+            
             var content = JsonContentService.GetLoginContent(
                 UserNameTextBox.Text, PasswordTextBox.Text);
-
+                
             HttpResponseMessage response = await client.PostAsync("http://localhost:5243/api/Login", content);
 
             if (response.IsSuccessStatusCode)
-            {
-                new MainWindow().Show();
+            {   
+                string responseContent = await response.Content.ReadAsStringAsync();
+                var tokenObject = JsonConvert.DeserializeObject<JObject>(responseContent);
+                Program.accessToken = tokenObject["accessToken"].ToString();
+                new MainWindow()
+                {
+                    DataContext = new MainWindowViewModel()
+                }.Show();
                 Close();
             }
             else
             {
-                await MessageBoxManager.GetMessageBoxStandard("Error", $"Ошибка отправки запроса: {response.StatusCode}", ButtonEnum.Ok).ShowWindowAsync();
+                await MessageBoxManager.GetMessageBoxStandard("Error", $"{await response.Content.ReadAsStringAsync()}", ButtonEnum.Ok).ShowWindowAsync();
             }
         }
     }

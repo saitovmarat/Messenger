@@ -2,9 +2,9 @@
 
 namespace Messenger.UI.Views;
 
-public partial class HomePageView : UserControl
+public partial class AddChatPageView : UserControl
 {
-    public HomePageView()
+    public AddChatPageView()
     {
         InitializeComponent();
     }

@@ -4,11 +4,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
     x:Class="Messenger.UI.RegistrationWindow"
-    Title="Регистрация"
+    Icon="/Assets/Logo.png"
     Background="Gray">
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+    <Grid>
+      <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Image Source="/Assets/Images/Logo.png" Width="50" Height="50" Margin="0,0,10,0"/>
+            <Image Source="/Assets/Logo.png" Width="50" Height="50" Margin="0,0,10,0"/>
             <Label VerticalAlignment="Center">TeleTonna</Label>
         </StackPanel>
         <TextBox Width="250" HorizontalAlignment="Center" Margin="0,10"
@@ -25,7 +27,7 @@
             <Button.BorderThickness>
                 <Thickness>0,1,1,1</Thickness>
             </Button.BorderThickness>
-            <Image x:Name="NewPasswordEye" Source="/Assets/Images/ClosedEye.png" Width="20" Height="20"/>
+            <Image x:Name="NewPasswordEye" Source="/Assets/ClosedEye.png" Width="20" Height="20"/>
           </Button>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -38,12 +40,17 @@
             <Button.BorderThickness>
                 <Thickness>0,1,1,1</Thickness>
             </Button.BorderThickness>
-            <Image x:Name="RepeatPasswordEye" Source="/Assets/Images/ClosedEye.png" Width="20" Height="20"/>
+            <Image x:Name="RepeatPasswordEye" Source="/Assets/ClosedEye.png" Width="20" Height="20"/>
           </Button>
         </StackPanel>
         <Button Content="Зарегистрироваться" Width="200" 
           HorizontalContentAlignment="Center" 
           HorizontalAlignment="Center" Margin="0,10"
           Click="Register_Click"/>
-    </StackPanel>
+      </StackPanel>
+      <Button HorizontalAlignment="Left" VerticalAlignment="Top" Click="GoBack_Click">
+        <Image Source="/Assets/GoBackArrow.png" Width="30" Height="30" />
+      </Button>
+    </Grid>
+    
 </Window>
