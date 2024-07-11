@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -7,7 +8,6 @@ using Avalonia.Layout;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Messenger.UI.Schemas;
-using Messenger.UI.Services;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
 using Newtonsoft.Json;
@@ -18,14 +18,6 @@ namespace Messenger.UI.ViewModels.SplitViewPane;
 public partial class ChatPageViewModel : ViewModelBase 
 {
     public string Id { get; set; }
-    // public ChatPageViewModel()
-    // {
-    //     Id = "";
-    //     for(int i = 0; i < 10; i++)
-    //     {
-    //         Items.Add(new MessageItemTemplate(true, "User", "Date", "Message"));
-    //     }
-    // }
     public ChatPageViewModel(string id)
     {
         Id = id;
@@ -33,7 +25,7 @@ public partial class ChatPageViewModel : ViewModelBase
     }
 
     #region LoadAllMessages
-    private async void LoadAllMessages()
+    public async void LoadAllMessages()
     {
         List<MessageSchema>? messages = await GetAllMessages();
         for(int i = 0; i < messages?.Count; i++)
@@ -47,17 +39,23 @@ public partial class ChatPageViewModel : ViewModelBase
         HttpClient client = new();
         client.DefaultRequestHeaders.Authorization = 
             new AuthenticationHeaderValue("Bearer", Program.accessToken);
-        
-        var response = await client.GetAsync($"http://localhost:5243/api/Messages?chatId={Id}");
 
+        if(Guid.TryParse(Id, out Guid chatId) == false)
+        {
+            await MessageBoxManager.GetMessageBoxStandard("Error", $"Ошибка перевода строки в Guid", ButtonEnum.Ok).ShowWindowAsync();
+            return [];
+        }
+        
+        var response = await client.GetAsync($"http://localhost:5243/api/Messages?chatId={chatId}");
+        Console.WriteLine("Success Guid = " + chatId + "]");
         if(response.IsSuccessStatusCode){
             var responseContent = await response.Content.ReadAsStringAsync();
             var messagesList = JsonConvert.DeserializeObject<List<MessageSchema>>(responseContent);
             return messagesList;
         }
         else{
-            await MessageBoxManager.GetMessageBoxStandard("Error", $"Ошибка получения сообщений: {response.StatusCode}", ButtonEnum.Ok).ShowWindowAsync();
-            return new List<MessageSchema>();
+            await MessageBoxManager.GetMessageBoxStandard("Error", $"Ошибка получения сообщений: {await response.Content.ReadAsStringAsync()}", ButtonEnum.Ok).ShowWindowAsync();
+            return [];
         }
     }
     #endregion
@@ -71,7 +69,7 @@ public partial class ChatPageViewModel : ViewModelBase
 
     [ObservableProperty]
     private string? _messageTextBoxText;
-    public ObservableCollection<MessageItemTemplate> Items { get; } = new();
+    public ObservableCollection<MessageItemTemplate> Items { get; } = [];
 }
 public class MessageItemTemplate
 {

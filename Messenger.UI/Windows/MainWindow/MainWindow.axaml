@@ -23,21 +23,17 @@
             <ScrollViewer>
                 <StackPanel Spacing="5"
                             Margin="5">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
 
-                        <Button Command="{Binding SettingsCommand}" Margin="0,0,10,0">
-                            <PathIcon Data="{StaticResource SettingsRegular}" />
-                        </Button>
-
-                        <Button Command="{Binding AddChatCommand}" Grid.Column="1">
-                            <PathIcon Data="{StaticResource AddSquareRegular}" />
-                        </Button>                
-                    </Grid>
-                    
+                    <Button Command="{Binding AddChatCommand}" HorizontalAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <PathIcon Grid.Column="0" Data="{StaticResource AddSquareRegular}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="1" Text="Создать чат" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Grid>
+                    </Button>   
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -49,7 +45,6 @@
                         <Button Grid.Column="1" Command="{Binding SearchChatCommand}">
                             <PathIcon Data="{StaticResource SearchRegular}" />
                         </Button>
-
                     </Grid>
 
                     <ListBox ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedListItem}">

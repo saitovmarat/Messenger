@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -20,24 +21,21 @@ public partial class AddChatPageViewModel : ViewModelBase
     private string? _chatNameTextBox;
 
     [RelayCommand]
-    private void CreateChat()
+    private async Task CreateChat()
     {
+        HttpClient client = new();
+        client.DefaultRequestHeaders.Authorization =
+            new AuthenticationHeaderValue("Bearer", Program.accessToken);
+        var content = JsonContentService.GetAddChatContent(ChatNameTextBox);
+        var response = await client.PostAsync("http://localhost:5243/api/Chats", content);
+        if(response.IsSuccessStatusCode){
+            var responseContent = await response.Content.ReadAsStringAsync();
+            MainWindowViewModel.Items.Add(new ListItemTemplate(new ChatPageViewModel(responseContent), ChatNameTextBox, "PeopleRegular"));
+        }
+        else{
+            dynamic responseJson = JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync());
+            await MessageBoxManager.GetMessageBoxStandard("Error", $"Ошибка получения чатов: {responseJson.errors}", ButtonEnum.Ok).ShowWindowAsync();
 
+        }
     }
-    // private async Task CreateChatAsync()
-    // {
-    //     HttpClient client = new HttpClient();
-    //     client.DefaultRequestHeaders.Authorization =
-    //         new AuthenticationHeaderValue("Bearer", Program.accessToken);
-    //     var content = JsonContentService.GetAddChatContent(ChatNameTextBox);
-    //     var response = await client.PostAsync("http://localhost:5243/api/Chats", content);
-    //     if(response.IsSuccessStatusCode){
-    //         MainWindowViewModel.Items.Add(new ListItemTemplate(new ChatPageViewModel(), ChatNameTextBox, "PeopleRegular"));
-    //     }
-    //     else{
-    //         dynamic responseJson = JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync());
-    //         await MessageBoxManager.GetMessageBoxStandard("Error", $"Ошибка получения чатов: {responseJson.errors}", ButtonEnum.Ok).ShowWindowAsync();
-
-    //     }
-    // }
 }

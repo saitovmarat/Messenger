@@ -55,8 +55,8 @@ public partial class MainWindowViewModel : ViewModelBase
             return chatList;
         }
         else{
-            await MessageBoxManager.GetMessageBoxStandard("Error", $"Ошибка получения чатов: {response.StatusCode}", ButtonEnum.Ok).ShowWindowAsync();
-            return new List<ChatInfoSchema>();
+            await MessageBoxManager.GetMessageBoxStandard("Error", $"Ошибка получения чатов: {await response.Content.ReadAsStringAsync()}", ButtonEnum.Ok).ShowWindowAsync();
+            return [];
         }
         
     } 
@@ -72,26 +72,26 @@ public partial class MainWindowViewModel : ViewModelBase
     partial void OnSelectedListItemChanged(ListItemTemplate? value)
     {
         if(value is null) return;
-        var instance = Activator.CreateInstance(value.ViewModel.GetType());
-        if(instance is null) return;
-        CurrentPage = (ViewModelBase)instance;
+        if(value.ViewModel is ChatPageViewModel)
+        {
+            var chatPageViewModel = value.ViewModel as ChatPageViewModel;
+            CurrentPage = chatPageViewModel;
+        }
+        else
+        {
+            var instance = Activator.CreateInstance(value.ViewModel.GetType());
+            if(instance is null) return;
+            CurrentPage = (ViewModelBase)instance;
+        }
     }
 
-    public static ObservableCollection<ListItemTemplate> Items { get; } = new();
+    public static ObservableCollection<ListItemTemplate> Items { get; } = [];
 
     #region OnViewsClick
     [RelayCommand]
     private void SearchChat()
     {
         var instance = Activator.CreateInstance(typeof(SearchChatsPageViewModel)); 
-        if(instance is null) return;
-        CurrentPage = (ViewModelBase)instance;
-    }
-
-    [RelayCommand]
-    private void Settings()
-    {
-        var instance = Activator.CreateInstance(typeof(SettingsPageViewModel)); 
         if(instance is null) return;
         CurrentPage = (ViewModelBase)instance;
     }
