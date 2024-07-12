@@ -11,6 +11,7 @@ using Messenger.UI.Schemas;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.SignalR.Client;
 
 
 namespace Messenger.UI.ViewModels.SplitViewPane;
@@ -18,9 +19,17 @@ namespace Messenger.UI.ViewModels.SplitViewPane;
 public partial class ChatPageViewModel : ViewModelBase 
 {
     public string Id { get; set; }
+    HubConnection connection;
     public ChatPageViewModel(string id)
     {
         Id = id;
+        connection = new HubConnectionBuilder()
+            .WithUrl("http://localhost:5243/api/ChatMessages", options =>
+            { 
+                options.AccessTokenProvider = () => Task.FromResult(Program.accessToken);
+            })
+            .WithAutomaticReconnect()
+            .Build();
         LoadAllMessages();
     }
 
@@ -32,6 +41,14 @@ public partial class ChatPageViewModel : ViewModelBase
         {
             Items.Add(new MessageItemTemplate(false, messages[i].Sender?.UserName, messages[i].MessageSentTime.ToString(), messages[i].Text));
         }
+
+        connection.On<MessageSchema>("ReceiveMessage", (message) =>
+        {
+            Items.Add(new MessageItemTemplate(false, message.Sender?.UserName, message.MessageSentTime.ToString(), message.Text));
+        });
+
+        await connection.StartAsync();
+        await connection.InvokeAsync("JoinChat", new JoinChatScheme(Program.userName, Id));
     }
 
     private async Task<List<MessageSchema>?> GetAllMessages()
@@ -61,10 +78,10 @@ public partial class ChatPageViewModel : ViewModelBase
     #endregion
     
     [RelayCommand]
-    private void SendMessage()
+    private async void SendMessage()
     {
-        MessageTextBoxText = "Not Implemented";
-
+        await connection.InvokeAsync("SendMessage", new SendMessageToChatSchema(Id, Program.userName, MessageTextBoxText));
+        MessageTextBoxText = "";
     } 
 
     [ObservableProperty]
@@ -75,7 +92,7 @@ public class MessageItemTemplate
 {
     public MessageItemTemplate(bool isMyMessage, string? userName, string? date, string? message)
     {
-        if(isMyMessage)
+        if(Program.userName == userName)
         {
             Alignment = HorizontalAlignment.Right;
         }
