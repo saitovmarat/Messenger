@@ -47,6 +47,7 @@ public partial class EntryWindow : Window
                 string responseContent = await response.Content.ReadAsStringAsync();
                 var tokenObject = JsonConvert.DeserializeObject<JObject>(responseContent);
                 Program.accessToken = tokenObject["accessToken"].ToString();
+                Program.userName = UserNameTextBox.Text;
                 new MainWindow()
                 {
                     DataContext = new MainWindowViewModel()
