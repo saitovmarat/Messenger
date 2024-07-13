@@ -40,8 +40,7 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         
-                        <TextBox Grid.Column="0" VerticalAlignment="Center" />
-
+                        <TextBox Text="{Binding SearchTextBoxText}" Grid.Column="0" VerticalAlignment="Center" />
                         <Button Grid.Column="1" Command="{Binding SearchChatCommand}">
                             <PathIcon Data="{StaticResource SearchRegular}" />
                         </Button>
@@ -52,7 +51,7 @@
                             <DataTemplate DataType="{x:Type vm:ListItemTemplate}">
                                 <StackPanel Spacing="15" Orientation="Horizontal">
                                     <PathIcon Data="{Binding ListItemIcon}" />
-                                    <TextBlock Text="{Binding Label}"></TextBlock>
+                                    <TextBlock Text="{Binding Label}" />
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

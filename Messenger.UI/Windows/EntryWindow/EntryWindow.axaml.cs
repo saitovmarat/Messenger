@@ -56,7 +56,18 @@ public partial class EntryWindow : Window
             }
             else
             {
-                await MessageBoxManager.GetMessageBoxStandard("Error", $"{await response.Content.ReadAsStringAsync()}", ButtonEnum.Ok).ShowWindowAsync();
+                string errorResponse = await response.Content.ReadAsStringAsync();
+                string errorMessage = "";
+                try
+                {
+                    JObject? errorObject = JObject.Parse(errorResponse);
+                    errorMessage = errorObject["errors"]["Password"][0].ToString();
+                }
+                catch (JsonReaderException)
+                {
+                    errorMessage = errorResponse;
+                }
+                await MessageBoxManager.GetMessageBoxStandard("Error", errorMessage, ButtonEnum.Ok).ShowWindowAsync();
             }
         }
     }

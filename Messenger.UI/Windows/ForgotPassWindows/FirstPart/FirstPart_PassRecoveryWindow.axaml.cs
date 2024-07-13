@@ -6,8 +6,11 @@ using Avalonia.Interactivity;
 using Messenger.UI.Services;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
-#pragma warning disable CS8604
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
+#pragma warning disable CS8604 // Possible null reference argument.
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
 namespace Messenger.UI;
 
 public partial class FirstPart_PassRecoveryWindow : Window
@@ -36,7 +39,18 @@ public partial class FirstPart_PassRecoveryWindow : Window
                 Close();
             }
             else{
-                await MessageBoxManager.GetMessageBoxStandard("Error", $"Ошибка отправки запроса: {response.StatusCode}", ButtonEnum.Ok).ShowWindowAsync();
+                string errorResponse = await response.Content.ReadAsStringAsync();
+                string errorMessage = "";
+                try
+                {
+                    JObject errorObject = JObject.Parse(errorResponse);
+                    errorMessage = errorObject["errors"]["Email"][0].ToString();
+                }
+                catch (JsonReaderException)
+                {
+                    errorMessage = errorResponse;
+                }
+                await MessageBoxManager.GetMessageBoxStandard("Error", errorMessage, ButtonEnum.Ok).ShowWindowAsync();
             }
         }
     }

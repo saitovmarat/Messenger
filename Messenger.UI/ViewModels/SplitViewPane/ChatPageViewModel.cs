@@ -12,14 +12,16 @@ using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.SignalR.Client;
+using Avalonia.Controls;
 
+#pragma warning disable CS8604 // Possible null reference argument.
 
 namespace Messenger.UI.ViewModels.SplitViewPane;
 
 public partial class ChatPageViewModel : ViewModelBase 
 {
     public string Id { get; set; }
-    HubConnection connection;
+    private readonly HubConnection connection;
     public ChatPageViewModel(string id)
     {
         Id = id;
@@ -39,12 +41,12 @@ public partial class ChatPageViewModel : ViewModelBase
         List<MessageSchema>? messages = await GetAllMessages();
         for(int i = 0; i < messages?.Count; i++)
         {
-            Items.Add(new MessageItemTemplate(false, messages[i].Sender?.UserName, messages[i].MessageSentTime.ToString(), messages[i].Text));
+            Items.Add(new MessageItemTemplate(messages[i].Sender?.UserName, messages[i].MessageSentTime.ToString(), messages[i].Text));
         }
 
         connection.On<MessageSchema>("ReceiveMessage", (message) =>
         {
-            Items.Add(new MessageItemTemplate(false, message.Sender?.UserName, message.MessageSentTime.ToString(), message.Text));
+            Items.Add(new MessageItemTemplate(message.Sender?.UserName, message.MessageSentTime.ToString(), message.Text));
         });
 
         await connection.StartAsync();
@@ -56,15 +58,12 @@ public partial class ChatPageViewModel : ViewModelBase
         HttpClient client = new();
         client.DefaultRequestHeaders.Authorization = 
             new AuthenticationHeaderValue("Bearer", Program.accessToken);
-
-        if(Guid.TryParse(Id, out Guid chatId) == false)
+        if(!Guid.TryParse(Id, out Guid chatId))
         {
             await MessageBoxManager.GetMessageBoxStandard("Error", $"Ошибка перевода строки в Guid", ButtonEnum.Ok).ShowWindowAsync();
             return [];
         }
-        
         var response = await client.GetAsync($"http://localhost:5243/api/Messages?chatId={chatId}");
-        Console.WriteLine("Success Guid = " + chatId + "]");
         if(response.IsSuccessStatusCode){
             var responseContent = await response.Content.ReadAsStringAsync();
             var messagesList = JsonConvert.DeserializeObject<List<MessageSchema>>(responseContent);
@@ -78,7 +77,7 @@ public partial class ChatPageViewModel : ViewModelBase
     #endregion
     
     [RelayCommand]
-    private async void SendMessage()
+    private async Task SendMessage()
     {
         await connection.InvokeAsync("SendMessage", new SendMessageToChatSchema(Id, Program.userName, MessageTextBoxText));
         MessageTextBoxText = "";
@@ -90,16 +89,10 @@ public partial class ChatPageViewModel : ViewModelBase
 }
 public class MessageItemTemplate
 {
-    public MessageItemTemplate(bool isMyMessage, string? userName, string? date, string? message)
+    public MessageItemTemplate(string? userName, string? date, string? message)
     {
-        if(Program.userName == userName)
-        {
-            Alignment = HorizontalAlignment.Right;
-        }
-        else
-        {
-            Alignment = HorizontalAlignment.Left;
-        }
+        Alignment = (Program.userName == userName)?
+            HorizontalAlignment.Right : HorizontalAlignment.Left; 
 
         UserName = userName;
         Date = date;

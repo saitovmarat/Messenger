@@ -7,18 +7,25 @@
         x:Class="Messenger.UI.Views.SearchChatsPageView"
         x:DataType="vm:SearchChatsPageViewModel">
 
-    <ListBox>
-        <ListBoxItem>
-            <Button>
-                Switch
-            </Button>
-        </ListBoxItem>
-        <ListBoxItem>
-            <TextBlock Text="Текстовый блок 2" />
-        </ListBoxItem>
-        <ListBoxItem>
-            <TextBlock Text="Текстовый блок 3" />
-        </ListBoxItem>
-    </ListBox>
-
+    <ScrollViewer> 
+        <ListBox ItemsSource="{Binding Items}">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type vm:ChatItemTemplate}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <PathIcon Grid.Column="0" Data="{Binding ChatItemIcon}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,10,10,10" />
+                        <StackPanel Grid.Column="1">
+                            <TextBlock FontSize="20" FontWeight="Bold" Text="{Binding ChatName}" />
+                            <TextBlock Text="{Binding LastMessage}" TextWrapping="Wrap" />
+                        </StackPanel>
+                        <Button Grid.Column="2" Content="Join" Command="{Binding JoinChatCommand}" />
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </ScrollViewer>
 </UserControl>

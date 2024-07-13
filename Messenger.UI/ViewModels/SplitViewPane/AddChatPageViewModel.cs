@@ -30,7 +30,9 @@ public partial class AddChatPageViewModel : ViewModelBase
         var response = await client.PostAsync("http://localhost:5243/api/Chats", content);
         if(response.IsSuccessStatusCode){
             var responseContent = await response.Content.ReadAsStringAsync();
-            MainWindowViewModel.Items.Add(new ListItemTemplate(new ChatPageViewModel(responseContent), ChatNameTextBox, "PeopleRegular"));
+            dynamic responseJson = JsonConvert.DeserializeObject(responseContent);
+            string chatId = responseJson.id;
+            MainWindowViewModel.Items.Add(new ListItemTemplate(new ChatPageViewModel(chatId), ChatNameTextBox, "PeopleRegular"));
         }
         else{
             dynamic responseJson = JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync());

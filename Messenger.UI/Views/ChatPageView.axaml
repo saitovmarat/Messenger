@@ -13,24 +13,30 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
-        <ScrollViewer Grid.Row="0" 
+        <ScrollViewer Grid.Row="0" x:Name="MessageScrollViewer"
                       HorizontalScrollBarVisibility="Auto"
                       VerticalScrollBarVisibility="Auto"> 
             <ListBox ItemsSource="{Binding Items}">
                 <ListBox.ItemTemplate>
                     <DataTemplate DataType="{x:Type vm:MessageItemTemplate}">
                         <StackPanel Spacing="15" Orientation="Vertical">
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding UserName}"></TextBlock>
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding Date}"></TextBlock>
-                            <TextBlock HorizontalAlignment="{Binding Alignment}" Text="{Binding Message}" TextWrapping="Wrap" MaxWidth="500"></TextBlock>
+                            <TextBlock FontSize="20" FontWeight="Bold" HorizontalAlignment="{Binding Alignment}" Text="{Binding UserName}" />
+                            <TextBlock FontSize="10" HorizontalAlignment="{Binding Alignment}" Text="{Binding Date}" />
+                            <TextBlock HorizontalAlignment="{Binding Alignment}" Text="{Binding Message}" TextWrapping="Wrap" MaxWidth="500" />
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </ScrollViewer>
-        
-        <TextBox Grid.Row="1" Text="{Binding MessageTextBoxText}" VerticalAlignment="Bottom" Margin="5,0,5,0"/>
-        <Button Grid.Row="1" Command="{Binding SendMessageCommand}" Content="Отправить" HorizontalAlignment="Right" Margin="5,0,5,0"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Text="{Binding MessageTextBoxText}" VerticalAlignment="Bottom" TextWrapping="Wrap"/>
+            <Button Grid.Column="1" Command="{Binding SendMessageCommand}" Content="Отправить" HorizontalAlignment="Right" Margin="0,0,0,0"/>
+        </Grid>
     </Grid>
 
 </UserControl>

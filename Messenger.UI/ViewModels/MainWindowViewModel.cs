@@ -71,27 +71,39 @@ public partial class MainWindowViewModel : ViewModelBase
 
     partial void OnSelectedListItemChanged(ListItemTemplate? value)
     {
-        if(value is null) return;
-        if(value.ViewModel is ChatPageViewModel)
-        {
-            var chatPageViewModel = value.ViewModel as ChatPageViewModel;
+        if (value is null) return;
+
+        var viewModel = value.ViewModel;
+
+        if (viewModel is ChatPageViewModel chatPageViewModel)
             CurrentPage = chatPageViewModel;
-        }
+
+        else if (viewModel is SearchChatsPageViewModel searchPageViewModel)
+            CurrentPage = searchPageViewModel;
+
         else
         {
-            var instance = Activator.CreateInstance(value.ViewModel.GetType());
-            if(instance is null) return;
-            CurrentPage = (ViewModelBase)instance;
+            var viewModelInstance = Activator.CreateInstance(viewModel.GetType());
+            if (viewModelInstance is null) return;
+            CurrentPage = (ViewModelBase)viewModelInstance;
         }
     }
 
     public static ObservableCollection<ListItemTemplate> Items { get; } = [];
 
     #region OnViewsClick
+    [ObservableProperty]
+    private string? _searchTextBoxText;
+    
     [RelayCommand]
     private void SearchChat()
     {
-        var instance = Activator.CreateInstance(typeof(SearchChatsPageViewModel)); 
+        if(string.IsNullOrWhiteSpace(SearchTextBoxText)) 
+        {
+            MessageBoxManager.GetMessageBoxStandard("Error", "Поле поиска пустое", ButtonEnum.Ok).ShowWindowAsync();
+            return;
+        }
+        var instance = Activator.CreateInstance(typeof(SearchChatsPageViewModel), SearchTextBoxText); 
         if(instance is null) return;
         CurrentPage = (ViewModelBase)instance;
     }

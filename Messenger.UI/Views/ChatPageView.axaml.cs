@@ -7,5 +7,6 @@ public partial class ChatPageView : UserControl
     public ChatPageView()
     {
         InitializeComponent();
+        MessageScrollViewer.ScrollToEnd();
     }
 }
